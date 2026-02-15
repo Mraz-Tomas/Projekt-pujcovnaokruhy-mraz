@@ -1,0 +1,118 @@
+﻿@model okruhy_pujcovnaMVCAPP.Entities.car
+@{
+    ViewData["Title"] = "Detail auta";
+}
+
+<style>
+    .detail-wrap {
+        max-width: 1100px;
+        margin: 40px auto;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 32px;
+    }
+
+    .car-img {
+        width: 100%;
+        height: 420px;
+        border-radius: 22px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,.2);
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 22px;
+        padding: 28px;
+        box-shadow: 0 16px 40px rgba(0,0,0,.1);
+    }
+
+    h1 {
+        font-size: 36px;
+        font-weight: 900;
+        margin-bottom: 10px;
+    }
+
+    .muted {
+        color: #6b7280;
+    }
+
+    .specs {
+        margin-top: 22px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+
+    .spec {
+        background: #f4f4f5;
+        padding: 14px 16px;
+        border-radius: 14px;
+        font-weight: 700;
+    }
+
+    .price {
+        margin-top: 22px;
+        font-size: 28px;
+        font-weight: 900;
+    }
+
+    .btns {
+        margin-top: 26px;
+        display: flex;
+        gap: 14px;
+    }
+
+    .btnx {
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-weight: 900;
+        text-decoration: none;
+        border: 1px solid rgba(0,0,0,.15);
+        color: #111;
+        background: #fff;
+    }
+
+        .btnx.dark {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        .btnx:hover {
+            opacity: .9;
+        }
+</style>
+
+<div class="detail-wrap">
+
+    <div class="car-img">
+        <img src="/images/cars/car_@(Model.car_id).jpg"
+             onerror="this.onerror=null;this.src='/images/placeholder.jpg';"
+             style="width:100%;max-width:700px;border-radius:22px;box-shadow:0 20px 40px rgba(0,0,0,.2);"
+             alt="Auto" />
+    </div>
+
+    <div class="card">
+        <h1>@Model.brand @Model.model</h1>
+        <div class="muted">Sportovní vůz dostupný na vybraných okruzích</div>
+
+        <div class="specs">
+            <div class="spec">⚡ Výkon: @Model.power_hp HP</div>
+            <div class="spec">🏁 Typ: okruhové auto</div>
+            <div class="spec">🛠 Převodovka: manuál / automat</div>
+            <div class="spec">🔥 Zážitek: HIGH</div>
+        </div>
+
+        <div class="price">
+            💸 @Model.price_per_day Kč / den
+        </div>
+
+        <div class="btns">
+            <a href="/Circuits" class="btnx dark">Vybrat okruh</a>
+            <a href="/Cars" class="btnx">Zpět na auta</a>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,13 @@
+﻿@model okruhy_pujcovnaMVCAPP.Entities.circuit
+@{
+    ViewData["Title"] = "Smazat okruh";
+}
+
+<h1>Smazat okruh</h1>
+<p>Opravdu chceš smazat okruh <b>@Model.Name</b>?</p>
+
+<form method="post" action="/Circuits/DeleteConfirmed/@Model.CircuitId">
+    @Html.AntiForgeryToken()
+    <button class="btn btn-danger">Ano, smazat</button>
+    <a class="btn btn-link" href="/Circuits">Ne, zpět</a>
+</form>

@@ -1,0 +1,38 @@
+﻿@model okruhy_pujcovnaMVCAPP.Entities.car
+@{
+    ViewData["Title"] = "Upravit auto";
+}
+
+<h1>Upravit auto</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label">Značka</label>
+        <input class="form-control" name="brand" value="@Model.brand" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input class="form-control" name="model" value="@Model.model" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Výkon (HP)</label>
+        <input class="form-control" name="powerHp" type="number" value="@Model.power_hp" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Cena / den</label>
+        <input class="form-control" name="pricePerDay" type="number" step="0.01" value="@Model.price_per_day" />
+    </div>
+
+    <button class="btn btn-dark">Uložit změny</button>
+    <a class="btn btn-link" href="/Cars">Zpět</a>
+</form>

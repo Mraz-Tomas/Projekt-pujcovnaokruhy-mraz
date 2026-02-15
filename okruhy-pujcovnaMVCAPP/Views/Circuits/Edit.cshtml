@@ -1,0 +1,33 @@
+﻿@model okruhy_pujcovnaMVCAPP.Entities.circuit
+@{
+    ViewData["Title"] = "Upravit okruh";
+}
+
+<h1>Upravit okruh</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label">Název okruhu</label>
+        <input class="form-control" name="name" value="@Model.Name" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Země</label>
+        <input class="form-control" name="country" value="@Model.country" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Délka (km)</label>
+        <input class="form-control" name="lengthKm" value="@Model.lenghtkm" />
+    </div>
+
+    <button class="btn btn-dark">Uložit změny</button>
+    <a class="btn btn-link" href="/Circuits">Zpět</a>
+</form>

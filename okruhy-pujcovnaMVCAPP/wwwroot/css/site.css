@@ -1,0 +1,140 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+/* ===== Layout container ===== */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 24px 50px;
+}
+
+/* ===== Navbar ===== */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.topbar-inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 18px;
+    color: #111;
+}
+
+    .brand img {
+        height: 34px;
+        width: auto;
+    }
+
+.menu {
+    display: flex;
+    gap: 22px;
+}
+
+    .menu a {
+        text-decoration: none;
+        font-weight: 800;
+        color: #333;
+    }
+
+        .menu a:hover {
+            color: #e10600;
+        }
+
+.auth {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user {
+    font-weight: 800;
+    background: #f4f4f4;
+    padding: 7px 12px;
+    border-radius: 999px;
+}
+
+.btn {
+    padding: 8px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 900;
+}
+
+    .btn.dark {
+        background: #111;
+        color: #fff;
+    }
+
+        .btn.dark:hover {
+            opacity: .9;
+        }
+
+    .btn.outline {
+        border: 1px solid #111;
+        color: #111;
+    }
+
+/* ===== Footer ===== */
+.app-footer {
+    border-top: 1px solid #eee;
+    padding: 14px 0;
+    background: #fff;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.muted {
+    color: #6b7280;
+}
+

@@ -1,0 +1,230 @@
+﻿@model okruhy_pujcovnaMVCAPP.Models.CircuitDetailVM
+@{
+    ViewData["Title"] = "Detail okruhu";
+}
+
+<style>
+    .wrap {
+        max-width: 1100px;
+        margin: 38px auto;
+    }
+
+    .hero {
+        border-radius: 26px;
+        overflow: hidden;
+        height: 360px;
+        position: relative;
+        box-shadow: 0 24px 55px rgba(0,0,0,.22);
+        background: #111;
+    }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(.75);
+        }
+
+        .hero .overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 26px;
+            color: #fff;
+        }
+
+    .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(0,0,0,.55);
+        border: 1px solid rgba(255,255,255,.18);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-weight: 900;
+        width: max-content;
+    }
+
+    .h1 {
+        font-size: 44px;
+        font-weight: 900;
+        line-height: 1.05;
+        margin: 10px 0 8px 0;
+    }
+
+    .sub {
+        opacity: .9;
+        max-width: 760px;
+    }
+
+    .info-row {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(3,minmax(0,1fr));
+        gap: 12px;
+    }
+
+    .inf {
+        background: #fff;
+        border: 1px solid rgba(0,0,0,.06);
+        border-radius: 18px;
+        padding: 14px 16px;
+        box-shadow: 0 12px 26px rgba(0,0,0,.08);
+        font-weight: 800;
+    }
+
+    .muted {
+        color: #6b7280;
+        font-weight: 700;
+    }
+
+    .section-title {
+        margin-top: 34px;
+        font-size: 26px;
+        font-weight: 900;
+    }
+
+    .grid {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+        gap: 16px;
+    }
+
+    .card {
+        border-radius: 20px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid rgba(0,0,0,.06);
+        box-shadow: 0 14px 30px rgba(0,0,0,.10);
+        transition: .22s;
+    }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(0,0,0,.14);
+        }
+
+        .card img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            display: block;
+        }
+
+    .pad {
+        padding: 14px;
+    }
+
+    .btnx {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-weight: 900;
+        text-decoration: none;
+        border: 1px solid rgba(0,0,0,.15);
+        color: #111;
+        background: #fff;
+    }
+
+        .btnx.dark {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+    .btnrow {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+    }
+
+    .note {
+        margin-top: 12px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: #fff7ed;
+        border: 1px solid rgba(245,158,11,.25);
+        color: #92400e;
+        font-weight: 800;
+    }
+</style>
+
+<div class="wrap">
+
+    <div class="hero">
+        <img src="/images/circuit/circuit_@(Model.Circuit.CircuitId).jpg"
+             onerror="this.onerror=null;this.src='/images/placeholder.jpg';"
+             alt="@Model.Circuit.Name" />
+
+        <div class="overlay">
+            <div class="pill">🏁 Okruh</div>
+            <div class="h1">@Model.Circuit.Name</div>
+            <div class="sub">
+                Vyber si auto, které je na tomto okruhu dostupné, a pokračuj k rezervaci.
+            </div>
+        </div>
+    </div>
+
+    <div class="info-row">
+        <div class="inf">
+            📍 Země
+            <div class="muted">@Model.Circuit.country</div>
+        </div>
+        <div class="inf">
+            📏 Délka
+            <div class="muted">@Model.Circuit.lenghtkm km</div>
+        </div>
+        <div class="inf">
+            ⭐ Obtížnost
+            <div class="muted">★★★☆☆ (střední)</div>
+        </div>
+    </div>
+
+    <!-- dostupne auta -->
+    <div class="section-title">Dostupná auta na tomto okruhu</div>
+
+    @if (Model.AvailableCars == null || Model.AvailableCars.Count == 0)
+    {
+        <div class="note">
+            Momentálně tu není žádné dostupné auto. Zkus jiný okruh nebo to zkus později.
+        </div>
+        <div class="btnrow">
+            <a class="btnx dark" href="/Circuits">← Zpět na okruhy</a>
+            <a class="btnx" href="/Cars">Zobrazit všechna auta</a>
+        </div>
+    }
+    else
+    {
+        <div class="grid">
+            @foreach (var car in Model.AvailableCars)
+            {
+                <div class="card">
+                    <img src="/images/cars/car_@(car.car_id).jpg"
+                         onerror="this.onerror=null;this.src='/images/placeholder.jpg';"
+                         alt="Auto" />
+                    <div class="pad">
+                        <div style="font-weight:900;font-size:18px;">@car.brand @car.model</div>
+                        <div class="muted">⚡ @car.power_hp HP</div>
+                        <div class="muted">💸 @car.price_per_day Kč / den</div>
+
+                        <div class="btnrow">
+                            <a class="btnx dark" href="/Cars/Detail/@car.car_id">Detail auta →</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="btnrow" style="margin-top:18px;">
+            <a class="btnx" href="/Circuits">← Zpět na okruhy</a>
+        </div>
+    }
+
+</div>

@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Registrace";
+}
+
+<style>
+    .box {
+        max-width: 520px;
+        margin: 70px auto;
+        padding: 22px;
+        border-radius: 16px;
+        box-shadow: 0 12px 28px rgba(0,0,0,.10);
+        background: white;
+    }
+</style>
+
+<div class="box">
+    <h2 class="mb-3">Registrace</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <form method="post">
+        <div class="row g-2">
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Jméno</label>
+                <input name="firstName" class="form-control" required />
+            </div>
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Příjmení</label>
+                <input name="lastName" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input name="email" class="form-control" type="email" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Heslo</label>
+            <input name="password" class="form-control" type="password" required />
+        </div>
+
+        <button class="btn btn-dark w-100" type="submit">Vytvořit účet</button>
+    </form>
+
+    <div class="text-muted mt-3">
+        Už máš účet? <a href="/User/Login">Přihlásit</a>
+    </div>
+</div>

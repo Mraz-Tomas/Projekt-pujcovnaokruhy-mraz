@@ -1,0 +1,237 @@
+﻿@{
+    ViewData["Title"] = "Domů";
+}
+
+<style>
+    /* ===== HOME HERO (CSS jen tady) ===== */
+    .home-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 18px 24px 50px;
+    }
+
+    .hero {
+        position: relative;
+        height: 520px;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 18px 40px rgba(0,0,0,.14);
+        background: #111;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: background-image 1s ease-in-out;
+    }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient( 90deg, rgba(0,0,0,.62), rgba(0,0,0,.25), rgba(0,0,0,.10) );
+        }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 28px;
+        color: #fff;
+        max-width: 760px;
+    }
+
+    .pill {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.14);
+        border: 1px solid rgba(255,255,255,.18);
+        width: fit-content;
+        font-size: 13px;
+    }
+
+    .hero-title {
+        margin: 12px 0 6px;
+        font-weight: 900;
+        font-size: 54px;
+        line-height: 1.02;
+        text-shadow: 0 10px 26px rgba(0,0,0,.65);
+    }
+
+    .hero-sub {
+        color: rgba(255,255,255,.86);
+        text-shadow: 0 8px 18px rgba(0,0,0,.55);
+        max-width: 680px;
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+    }
+
+    .btnx {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 900;
+        border: 0;
+        cursor: pointer;
+    }
+
+    .btn-dark {
+        background: #111;
+        color: #fff;
+    }
+
+        .btn-dark:hover {
+            opacity: .92;
+        }
+
+    .btn-light {
+        background: rgba(255,255,255,.14);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,.22);
+    }
+
+        .btn-light:hover {
+            background: rgba(255,255,255,.20);
+        }
+
+    .home-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 22px;
+    }
+
+    .home-card {
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 12px 26px rgba(0,0,0,.08);
+        border: 1px solid rgba(0,0,0,.06);
+        padding: 18px;
+    }
+
+        .home-card h3 {
+            margin: 0 0 6px 0;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+    .muted {
+        color: #6b7280;
+        margin: 0;
+    }
+
+    .btn-card {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 900;
+        margin-top: 12px;
+    }
+
+    .btn-card-dark {
+        background: #111;
+        color: #fff;
+    }
+
+        .btn-card-dark:hover {
+            opacity: .92;
+        }
+
+    .btn-card-gray {
+        background: #f3f4f6;
+        color: #111;
+        border: 1px solid rgba(0,0,0,.08);
+    }
+
+        .btn-card-gray:hover {
+            background: #e5e7eb;
+        }
+
+    @@media (max-width: 900px) {
+        .home-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero {
+            height: 560px;
+        }
+
+        .hero-title {
+            font-size: 42px;
+        }
+    }
+</style>
+
+<div class="home-wrap">
+
+    <div class="hero" id="hero">
+        <div class="hero-content">
+            <span class="pill">🏁 Půjčovna aut na okruhy</span>
+
+            <div style="display:flex; align-items:center; gap:12px; margin-top:10px;">
+                <img src="/images/logo.png" alt="TrackRent" style="height:54px; width:auto;" />
+                <div class="hero-title">TrackRent</div>
+            </div>
+
+            <p class="hero-sub">
+                Vyber si okruh, vyber si auto a rezervuj termín.
+                Zážitek z jízdy začíná jedním klikem.
+            </p>
+
+            <div class="hero-actions">
+                <a class="btnx btn-dark" href="/Circuits">Vybrat okruh →</a>
+                <a class="btnx btn-light" href="/Cars">Zobrazit auta →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-grid">
+        <div class="home-card">
+            <h3>🚗 Prohlédnout auta</h3>
+            <p class="muted">Zobrazí se všechna auta v nabídce jako kartičky.</p>
+            <a class="btn-card btn-card-gray" href="/Cars">Zobrazit auta →</a>
+        </div>
+
+        <div class="home-card">
+            <h3>🏁 Chceš si rezervovat auto?</h3>
+            <p class="muted">Nejdřív vyber okruh. Potom uvidíš, která auta jsou dostupná.</p>
+            <a class="btn-card btn-card-dark" href="/Circuits">Vybrat okruh →</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const hero = document.getElementById('hero');
+    const heroImages = [
+        '/images/bg1.jpg',
+        '/images/bg2.jpg',
+        '/images/bg3.jpg'
+    ];
+
+    let i = 0;
+
+    function setHero() {
+        hero.style.backgroundImage = `url('${heroImages[i]}')`;
+        i = (i + 1) % heroImages.length;
+    }
+
+    setHero();
+    setInterval(setHero, 4500);
+</script>

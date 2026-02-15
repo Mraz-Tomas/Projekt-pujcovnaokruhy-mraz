@@ -1,0 +1,13 @@
+﻿@model okruhy_pujcovnaMVCAPP.Entities.car
+@{
+    ViewData["Title"] = "Smazat auto";
+}
+
+<h1>Smazat auto</h1>
+<p>Opravdu chceš smazat auto <b>@Model.brand @Model.model</b>?</p>
+
+<form method="post" action="/Cars/DeleteConfirmed/@Model.car_id">
+    @Html.AntiForgeryToken()
+    <button class="btn btn-danger">Ano, smazat</button>
+    <a class="btn btn-link" href="/Cars">Ne, zpět</a>
+</form>
