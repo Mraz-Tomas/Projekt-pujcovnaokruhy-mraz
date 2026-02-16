@@ -17,6 +17,10 @@ namespace okruhy_pujcovnaMVCAPP.Entities
         public int power_hp { get; set; }
         [Column("price_per_day")]
         public decimal price_per_day { get; set; }
+        [Column("detail")]
+        public string? detail { get; set; }
+        [Column("transmision")]
+        public string? transmision { get; set; }
 
         public ICollection<circuitcar> circuitcar { get; set; }
     }

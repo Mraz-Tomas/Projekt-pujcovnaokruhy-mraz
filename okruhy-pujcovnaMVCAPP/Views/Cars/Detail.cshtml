@@ -96,13 +96,29 @@
 
     <div class="card">
         <h1>@Model.brand @Model.model</h1>
-        <div class="muted">Sportovní vůz dostupný na vybraných okruzích</div>
+        <div class="muted">@Model.detail</div>
 
         <div class="specs">
             <div class="spec">⚡ Výkon: @Model.power_hp HP</div>
             <div class="spec">🏁 Typ: okruhové auto</div>
-            <div class="spec">🛠 Převodovka: manuál / automat</div>
-            <div class="spec">🔥 Zážitek: HIGH</div>
+            <div class="spec">🛠 Převodovka: @Model.transmision</div>
+            <div class="spec">
+                🔥 Zážitek: 
+                @switch (Model.power_hp)
+                {
+                    case <250:
+                        <span>Medium</span>
+                    break;
+
+                    case <450:
+                        <span>High</span>
+                    break;
+                    case >= 451:
+                        <span>Very High</span>
+                    break;
+                }
+
+            </div>
         </div>
 
         <div class="price">

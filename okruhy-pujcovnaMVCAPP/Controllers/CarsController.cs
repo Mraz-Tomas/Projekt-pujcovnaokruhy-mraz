@@ -37,7 +37,7 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(string brand, string model, int powerHp, decimal pricePerDay)
+        public IActionResult Create(string brand, string model, int powerHp, decimal pricePerDay, string detail, string transmision)
         {
             if (string.IsNullOrWhiteSpace(brand) || string.IsNullOrWhiteSpace(model))
             {
@@ -50,7 +50,9 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
                 brand = brand,
                 model = model,
                 power_hp = powerHp,
-                price_per_day = pricePerDay
+                price_per_day = pricePerDay,
+                detail = detail,
+                transmision = transmision
             };
 
             DbContext.Cars.Add(c);
@@ -69,7 +71,7 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, string brand, string model, int powerHp, decimal pricePerDay)
+        public IActionResult Edit(int id, string brand, string model, int powerHp, decimal pricePerDay, string detail, string transmision)
         {
             var car = DbContext.Cars.FirstOrDefault(x => x.car_id == id);
             if (car == null) return NotFound();
@@ -84,6 +86,8 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
             car.model = model;
             car.power_hp = powerHp;
             car.price_per_day = pricePerDay;
+            car.detail = detail;
+            car.transmision = transmision;
 
             DbContext.SaveChanges();
 

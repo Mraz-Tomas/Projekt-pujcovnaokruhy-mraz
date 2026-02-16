@@ -33,6 +33,16 @@
         <input class="form-control" name="pricePerDay" type="number" step="0.01" value="@Model.price_per_day" />
     </div>
 
+    <div class="mb-3">
+        <label class="form-label">Detail o vozidle</label>
+        <input class="form-control" name="detail" value="@Model.detail" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Převodovka Manuál/Automatlabel>
+        <input class="form-control" name="transmision" value="@Model.transmision" />
+    </div>
+
+
     <button class="btn btn-dark">Uložit změny</button>
     <a class="btn btn-link" href="/Cars">Zpět</a>
 </form>
