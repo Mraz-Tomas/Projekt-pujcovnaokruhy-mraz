@@ -183,7 +183,22 @@
         </div>
         <div class="inf">
             ⭐ Obtížnost
-            <div class="muted">★★★☆☆ (střední)</div>
+            @switch (Model.Circuit.lenghtkm)
+            {
+                case <2:
+                    <div class= "muted" >★☆☆☆☆ (Lehký) </div >
+                break;
+                case <4:
+                    <div class= "muted" >★★★☆☆ (Střední) </div >
+                break;
+                case <8:
+                    <div class= "muted" >★★★★☆ (Těžký) </div >
+                break;
+                case >=8:
+                    <div class= "muted" >★★★★★ (Max Verstappen) </div >
+                break;
+            }
+
         </div>
     </div>
 
