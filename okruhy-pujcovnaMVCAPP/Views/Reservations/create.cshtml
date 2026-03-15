@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Vytvořit rezervaci";
+    var carId = ViewBag.CarId;
+    var circuitId = ViewBag.CircuitId;
+    var today = DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+<style>
+    .wrap {
+        max-width: 760px;
+        margin: 22px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+    }
+
+    h1 {
+        margin: 0 0 8px 0;
+        font-size: 1.4rem;
+    }
+
+    .muted {
+        color: #6b7280;
+        margin-bottom: 14px;
+    }
+
+    form {
+        display: grid;
+        gap: 12px;
+    }
+
+    .row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .field {
+        flex: 1 1 220px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    label {
+        font-weight: 700;
+        color: #111;
+        font-size: .95rem;
+    }
+
+    input[type="date"], input[type="datetime-local"], select {
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        background: #fbfdff;
+    }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    .btn {
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-weight: 800;
+        border: 1px solid rgba(0,0,0,.06);
+        background: #fff;
+        color: #111;
+        text-decoration: none;
+    }
+
+        .btn.primary {
+            background: #0f172a;
+            color: #fff;
+            border-color: #0f172a;
+        }
+
+    .note {
+        color: #6b7280;
+        font-size: .95rem;
+        margin-top: 6px;
+    }
+</style>
+
+<div class="wrap">
+    <h1>Rezervace auta</h1>
+    <div class="muted">Auto: č. @carId &nbsp; • &nbsp; Okruh: č. @circuitId</div>
+
+    <form method="post" action="/Reservations/Create">
+        <input type="hidden" name="carId" value="@carId" />
+        <input type="hidden" name="circuitId" value="@circuitId" />
+
+        <div class="row">
+            <div class="field">
+                <label for="startDate">Datum začátku</label>
+                <input id="startDate" name="startDate" type="date" value="@today" required />
+            </div>
+            <div class="field">
+                <label for="endDate">Datum konce</label>
+                <input id="endDate" name="endDate" type="date" value="@today" required />
+            </div>
+        </div>
+
+        <div class="note">Poznámka: čas rezervace bude považován od 00:00 do 23:59 zvoleného dne. Pro detailnější čas použijte administraci.</div>
+
+        <div class="actions">
+            <button type="submit" class="btn primary">Potvrdit rezervaci</button>
+            <a class="btn" href="/Reservations/SelectCar?circuitId=@circuitId">Zpět na výběr auta</a>
+        </div>
+    </form>
+</div>

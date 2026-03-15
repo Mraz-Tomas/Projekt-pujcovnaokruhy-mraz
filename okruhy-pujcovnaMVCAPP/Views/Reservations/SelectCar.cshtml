@@ -1,0 +1,150 @@
+﻿@model List<okruhy_pujcovnaMVCAPP.Entities.car>
+@{
+    ViewData["Title"] = "Vyber auto";
+    var circuitId = ViewBag.CircuitId;
+}
+
+<style>
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin: 18px 0;
+    }
+
+        .top h1 {
+            margin: 0;
+            font-size: 1.6rem;
+        }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+        gap: 18px;
+        margin-top: 12px;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 24px rgba(15,23,42,0.06);
+        transition: transform .18s, box-shadow .18s;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.09);
+        }
+
+    .thumb {
+        height: 160px;
+        background: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    .body {
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+    }
+
+    .title {
+        font-weight: 800;
+        font-size: 1.05rem;
+    }
+
+    .meta {
+        color: #6b7280;
+        font-size: .94rem;
+    }
+
+    .specs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+        color: #374151;
+        font-weight: 600;
+    }
+
+    .actions {
+        margin-top: auto;
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 9px 12px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+        border: 1px solid rgba(0,0,0,.08);
+        background: #fff;
+        color: #111;
+    }
+
+        .btn.primary {
+            background: #0f172a;
+            color: #fff;
+            border-color: #0f172a;
+        }
+
+    .muted {
+        color: #9ca3af;
+        font-size: .9rem;
+    }
+</style>
+
+<div class="top">
+    <div>
+        <h1>Vyber auto</h1>
+        <div class="muted">Okruh č. @circuitId — vyber auto pro rezervaci</div>
+    </div>
+    <a class="btn" href="/Home/Index">Zpět na přehled</a>
+</div>
+
+<div class="grid">
+    @if (Model == null || !Model.Any())
+    {
+        <div class="muted">Žádná dostupná auta pro tento okruh.</div>
+    }
+    else
+    {
+        foreach (var c in Model)
+        {
+            <div class="card">
+                <div class="thumb">
+                    <img src="/images/cars/car_@(c.car_id).jpg" onerror="this.onerror=null;this.src='/images/placeholder.jpg';" alt="@($"{c.brand} {c.model}")" />
+                </div>
+                <div class="body">
+                    <div class="title">@c.brand @c.model</div>
+                    <div class="meta">@c.transmision &nbsp; • &nbsp; @c.power_hp hp</div>
+                    <div class="specs">
+                        <div>Cena: <strong>@string.Format(System.Globalization.CultureInfo.GetCultureInfo("cs-CZ"), "{0:N0}", c.price_per_day) Kč/den</strong></div>
+                    </div>
+                    <div class="actions">
+                        <a class="btn primary" href="/Reservations/Create?carId=@c.car_id&circuitId=@circuitId">Rezervovat</a>
+                        <a class="btn" href="/Cars/Detail/@c.car_id">Detaily</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

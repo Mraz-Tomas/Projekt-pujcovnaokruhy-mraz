@@ -1,7 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Domů";
 }
-
+@if (TempData["success"] != null)
+{
+    <script>
+        alert("@TempData["success"]");
+    </script>
+}
 <style>
     /* ===== HOME HERO (CSS jen tady) ===== */
     .home-wrap {

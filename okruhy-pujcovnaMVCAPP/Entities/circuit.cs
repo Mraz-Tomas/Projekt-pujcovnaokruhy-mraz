@@ -15,8 +15,6 @@ namespace okruhy_pujcovnaMVCAPP.Entities
         public string? country { get; set; }
         [Column("length_km")]
         public decimal? lenghtkm { get; set; }
-        [Column("image_url")]
-        public string? imageurl { get; set; }
 
         public ICollection<circuitcar> circuitcar { get; set; }
     }
