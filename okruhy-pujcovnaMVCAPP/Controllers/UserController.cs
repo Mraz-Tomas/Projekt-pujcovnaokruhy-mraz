@@ -15,21 +15,21 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
 
         public UserController()
         {
-            DbContext = new AppDbContext(); // školní styl
+            DbContext = new AppDbContext(); 
         }
 
-        // GET: /User/Login
+        
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: /User/Login
+        
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
-            // najdu uživatele v DB
+            
             user? u = DbContext.Users.FirstOrDefault(x => x.Email == email && x.password == password);
 
             if (u == null)
@@ -38,11 +38,11 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
                 return View();
             }
 
-            // vytvoř cookie identitu
+           
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, u.UserId.ToString()),
-                new Claim(ClaimTypes.Name, $"{u.FirstName} {u.LastName}"),
+                new Claim(ClaimTypes.Name, $"{u.FirstName}"),
                 new Claim(ClaimTypes.Email, u.Email)
             };
 
@@ -54,14 +54,14 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
             return RedirectToAction("Index", "Circuits");
         }
 
-        // GET: /User/Register
+      
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: /User/Register
+        
         [HttpPost]
         public IActionResult Register(string firstName, string lastName, string email, string password)
         {
@@ -86,7 +86,7 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
             return RedirectToAction("Login");
         }
 
-        // /User/Logout
+        
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();

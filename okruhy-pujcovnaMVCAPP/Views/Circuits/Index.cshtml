@@ -86,7 +86,10 @@
         <h1>Okruhy</h1>
         <div class="muted">Vyber okruh</div>
     </div>
+    @if (User.Identity.Name =="Admin")
+    {
     <a class="btnx dark" href="/Circuits/Create">+ Přidat okruh</a>
+    }
 </div>
 
 <div class="grid">
@@ -105,8 +108,14 @@
 
                 <div class="actions">
                     <a class="btnx dark" href="/Circuits/Detail/@c.CircuitId">Detail</a>
+                    @if (User.Identity.Name =="Admin")
+                    {
                     <a class="btnx" href="/Circuits/Edit/@c.CircuitId">Upravit</a>
+                    }
+                    @if (User.Identity.Name =="Admin")
+                    {
                     <a class="btnx" href="/Circuits/Delete/@c.CircuitId">Smazat</a>
+                    }
                 </div>
             </div>
         </div>

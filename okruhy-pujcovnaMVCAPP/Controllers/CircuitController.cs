@@ -20,14 +20,14 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
             DbContext = new AppDbContext();
         }
 
-        // ===== LIST =====
+        
         public IActionResult Index()
         {
             var circuits = DbContext.Circuits.ToList();
             return View(circuits);
         }
 
-        // ===== DETAIL =====
+      
         public IActionResult Detail(int id)
         {
             var circuit = DbContext.Circuits.FirstOrDefault(x => x.CircuitId == id);
@@ -50,18 +50,26 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
         }
 
 
-        // ===== CREATE FORM =====
+       
         [HttpGet]
         public IActionResult Create()
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
-        // ===== CREATE SAVE =====
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(string name, string country, string lengthKm)
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             try
             {
                 if (string.IsNullOrWhiteSpace(name))
@@ -93,20 +101,28 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
             }
         }
 
-        // ===== EDIT FORM =====
+        
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             var c = DbContext.Circuits.FirstOrDefault(x => x.CircuitId == id);
             if (c == null) return NotFound();
             return View(c);
         }
 
-        // ===== EDIT SAVE =====
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, string name, string country, string lengthKm)
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             try
             {
                 var c = DbContext.Circuits.FirstOrDefault(x => x.CircuitId == id);
@@ -141,10 +157,14 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
             }
         }
 
-        // ===== DELETE =====
+       
         [HttpGet]
         public IActionResult Delete(int id)
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             var c = DbContext.Circuits.FirstOrDefault(x => x.CircuitId == id);
             if (c == null) return NotFound();
             return View(c);
@@ -154,6 +174,10 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             var c = DbContext.Circuits.FirstOrDefault(x => x.CircuitId == id);
             if (c == null) return NotFound();
 

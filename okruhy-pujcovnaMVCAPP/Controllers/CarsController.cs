@@ -32,6 +32,10 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
@@ -39,6 +43,10 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(string brand, string model, int powerHp, decimal pricePerDay, string detail, string transmision)
         {
+            if(User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             if (string.IsNullOrWhiteSpace(brand) || string.IsNullOrWhiteSpace(model))
             {
                 ViewBag.Error = "Vyplň značku a model.";
@@ -64,6 +72,10 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             var car = DbContext.Cars.FirstOrDefault(x => x.car_id == id);
             if (car == null) return NotFound();
             return View(car);
@@ -73,6 +85,10 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, string brand, string model, int powerHp, decimal pricePerDay, string detail, string transmision)
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             var car = DbContext.Cars.FirstOrDefault(x => x.car_id == id);
             if (car == null) return NotFound();
 
@@ -97,6 +113,10 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             var car = DbContext.Cars.FirstOrDefault(x => x.car_id == id);
             if (car == null) return NotFound();
             return View(car);
@@ -106,6 +126,10 @@ namespace okruhy_pujcovnaMVCAPP.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
+            if (User.Identity.Name != "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             var car = DbContext.Cars.FirstOrDefault(x => x.car_id == id);
             if (car == null) return NotFound();
 

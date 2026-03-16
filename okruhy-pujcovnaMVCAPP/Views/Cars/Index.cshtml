@@ -86,7 +86,10 @@
         <h1>Auta</h1>
         <div class="muted">Správa aut</div>
     </div>
+     @if (User.Identity.Name =="Admin")
+    {
     <a class="btnx dark" href="/Cars/Create">+ Přidat auto</a>
+    }
 </div>
 
 <div class="grid">
@@ -105,8 +108,14 @@
 
                 <div class="actions">
                     <a class="btnx dark" href="/Cars/Detail/@car.car_id">Detail</a>
+                    @if (User.Identity.Name =="Admin")
+                    {
                     <a class="btnx" href="/Cars/Edit/@car.car_id">Upravit</a>
+                    }
+                    @if (User.Identity.Name =="Admin")
+                    {
                     <a class="btnx" href="/Cars/Delete/@car.car_id">Smazat</a>
+                    }
                 </div>
             </div>
         </div>
